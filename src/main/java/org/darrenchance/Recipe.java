@@ -62,10 +62,20 @@ public class Recipe {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
         String json = recipesJson;
+        if (json == null){
+            System.out.println("JSON was blank/null");
+            return null;
+        }else if(json.isBlank()){
+            System.out.println("JSON was blank/null, contained text: "+ json);
+            return null;
+
+
+        }
         //Getting node from JSON String
         try {
             node = objectMapper.readTree(json);
         } catch (JsonProcessingException e) {
+
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
