@@ -42,6 +42,47 @@ public class TheMealDBApi {
         }
     }
 
+    public enum Area{
+        AMERICAN("American"),
+        BRITISH("British"),
+        CANADIAN("Canadian"),
+        CHINESE("Chinese"),
+        CROATIAN("Croatian"),
+        DUTCH("Dutch"),
+        EGYPTIAN("Egyptian"),
+        FILIPINO("Filipino"),
+        FRENCH("French"),
+        GREEK("Greek"),
+        INDIAN("Indian"),
+        IRISH("Irish"),
+        ITALIAN("Italian"),
+        JAMAICAN("Jamaican"),
+        JAPANESE("Japanese"),
+        KENYAN("Kenyan"),
+        MALAYSIAN("Malaysian"),
+        MEXICAN("Mexican"),
+        MOROCCAN("Moroccan"),
+        POLISH("Polish"),
+        PORTUGUESE("Portuguese"),
+        RUSSIAN("Russian"),
+        SPANISH("Spanish"),
+        THAI("Thai"),
+        TUNISIAN("Tunisian"),
+        TURKISH("Turkish"),
+        UKRAINIAN("Ukrainian"),
+        UNKNOWN("Unknown"),
+        VIETNAMESE("Vietnamese");
+
+        private final String label;
+
+        Area(String label) {
+            this.label = label;
+        }
+        public String getLabel() {
+            return label;
+        }
+    }
+
 
     /**
      * Search for recipes by main ingredient.
