@@ -24,12 +24,7 @@ public class TheMealDBApi {
      * The Meal DB supported endpoints.
      */
     public enum Endpoint {
-        MEAL_BY_NAME("https://www.themealdb.com/api/json/v1/1/search.php?s="),
-        MEALS_BY_FIRST_LETTER("https://www.themealdb.com/api/json/v1/1/search.php?f="),
-        MEAL_BY_ID("https://www.themealdb.com/api/json/v1/1/lookup.php?i="),
-        MEAL_BY_RANDOM("https://www.themealdb.com/api/json/v1/1/random.php"),
-        MEALS_BY_MAIN_INGREDIENT("https://www.themealdb.com/api/json/v1/1/filter.php?i="),
-        MEALS_BY_CATEGORY("https://www.themealdb.com/api/json/v1/1/filter.php?c=");
+        MEAL_BY_NAME("https://www.themealdb.com/api/json/v1/1/search.php?s="), MEALS_BY_FIRST_LETTER("https://www.themealdb.com/api/json/v1/1/search.php?f="), MEAL_BY_ID("https://www.themealdb.com/api/json/v1/1/lookup.php?i="), MEAL_BY_RANDOM("https://www.themealdb.com/api/json/v1/1/random.php"), MEALS_BY_MAIN_INGREDIENT("https://www.themealdb.com/api/json/v1/1/filter.php?i="), MEALS_BY_CATEGORY("https://www.themealdb.com/api/json/v1/1/filter.php?c=");
 
         private final String url;
 
@@ -42,47 +37,43 @@ public class TheMealDBApi {
         }
     }
 
-    public enum Area{
-        AMERICAN("American"),
-        BRITISH("British"),
-        CANADIAN("Canadian"),
-        CHINESE("Chinese"),
-        CROATIAN("Croatian"),
-        DUTCH("Dutch"),
-        EGYPTIAN("Egyptian"),
-        FILIPINO("Filipino"),
-        FRENCH("French"),
-        GREEK("Greek"),
-        INDIAN("Indian"),
-        IRISH("Irish"),
-        ITALIAN("Italian"),
-        JAMAICAN("Jamaican"),
-        JAPANESE("Japanese"),
-        KENYAN("Kenyan"),
-        MALAYSIAN("Malaysian"),
-        MEXICAN("Mexican"),
-        MOROCCAN("Moroccan"),
-        POLISH("Polish"),
-        PORTUGUESE("Portuguese"),
-        RUSSIAN("Russian"),
-        SPANISH("Spanish"),
-        THAI("Thai"),
-        TUNISIAN("Tunisian"),
-        TURKISH("Turkish"),
-        UKRAINIAN("Ukrainian"),
-        UNKNOWN("Unknown"),
-        VIETNAMESE("Vietnamese");
+    /**
+     * The Meal DB supported AREAS.
+     */
+    public enum Area {
+        AMERICAN("American"), BRITISH("British"), CANADIAN("Canadian"), CHINESE("Chinese"), CROATIAN("Croatian"),
+        DUTCH("Dutch"), EGYPTIAN("Egyptian"), FILIPINO("Filipino"), FRENCH("French"), GREEK("Greek"), INDIAN("Indian"),
+        IRISH("Irish"), ITALIAN("Italian"), JAMAICAN("Jamaican"), JAPANESE("Japanese"), KENYAN("Kenyan"),
+        MALAYSIAN("Malaysian"), MEXICAN("Mexican"), MOROCCAN("Moroccan"), POLISH("Polish"), PORTUGUESE("Portuguese"),
+        RUSSIAN("Russian"), SPANISH("Spanish"), THAI("Thai"), TUNISIAN("Tunisian"), TURKISH("Turkish"),
+        UKRAINIAN("Ukrainian"), UNKNOWN("Unknown"), VIETNAMESE("Vietnamese");
 
         private final String label;
 
         Area(String label) {
             this.label = label;
         }
+
         public String getLabel() {
             return label;
         }
     }
 
+    /**
+     * The Meal DB supported CATEGORIES.
+     */
+    public enum Category {
+        BEEF("Beef"), BREAKFAST("Breakfast"), CHICKEN("Chicken"), DESSERT("Dessert"),
+        GOAT("Goat"), LAMB("Lamb"), MISCELLANEOUS("Miscellaneous"), PASTA("Pasta"),
+        PORK("Pork"), SEAFOOD("Seafood"), SIDE("Side"), STARTER("Starter"), VEGAN("Vegan"),
+        VEGETARIAN("Vegetarian");
+
+        private final String label;
+
+        Category(String label) {
+            this.label = label;
+        }
+    }
 
     /**
      * Search for recipes by main ingredient.
