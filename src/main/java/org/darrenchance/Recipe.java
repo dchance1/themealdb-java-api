@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 
 public class Recipe {
-    enum Api {
+    public enum Api {
         THE_MEAL_DB("https://www.themealdb.com/api.php"),
         RECIPE_DOT_COM("https://www.google.com");
         private final String url;
@@ -19,7 +19,7 @@ public class Recipe {
     private String name;
     private String instructions;
     private ArrayList<String> ingredients;
-    private String url;
+    private String imageUrl;
 
     public ArrayList<String> getIngredients() {
         return ingredients;
@@ -35,29 +35,47 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" + "name='" + name + '\'' + ", instructions='" + instructions + '\'' + ", \ningredients=" + ingredients + '}';
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", ingredients=" + ingredients +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 
-
     /**
-     * Parses JSON to an Array of Recipe objects based on api
-     * the correct schema must be selected or an error will be thrown.
-     *
+     * Parses JSON to an Array of Recipe objects based on api.
+     * <p></p>
      * @param recipesJson a JSON string representing a recipe
      * @param api   the API used to get the recipe
-     * @return an array of Recipe objects
+     * @return an ArrayList of Recipe objects
      */
     public static ArrayList<Recipe> importRecipes(String recipesJson, Api api) {
+        ArrayList<Recipe> recipes = new ArrayList<>();
 
         switch (api){
             case THE_MEAL_DB:
+                recipes = getRecipesFromTheMealDB(recipesJson);
                 System.out.println("Importing Recipes with API: " + api);
-                break;
-            case RECIPE_DOT_COM:
+                return recipes;
+            case RECIPE_DOT_COM://Holder case, not implemented yet, just here as example.
                 System.out.println("Importing Recipes with API: " + api);
-
+                return null;
+            default:
+                System.out.println("API support for " + api+ " not available");
+                return null;
         }
+    }
 
+
+
+    public Recipe(String name, String instructions, ArrayList<String> ingredients) {
+        this.name = name;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
+    }
+
+    private static ArrayList<Recipe> getRecipesFromTheMealDB(String recipesJson){
         ArrayList<Recipe> recipes = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = null;
@@ -68,8 +86,6 @@ public class Recipe {
         }else if(json.isBlank()){
             System.out.println("JSON was blank/null, contained text: "+ json);
             return null;
-
-
         }
         //Getting node from JSON String
         try {
@@ -109,14 +125,8 @@ public class Recipe {
             }
         }
         return recipes;
-    }
 
-    public Recipe(String name, String instructions, ArrayList<String> ingredients) {
-        this.name = name;
-        this.instructions = instructions;
-        this.ingredients = ingredients;
     }
-
 
 
 }
