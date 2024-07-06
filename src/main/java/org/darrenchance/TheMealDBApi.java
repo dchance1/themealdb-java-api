@@ -102,7 +102,7 @@ public class TheMealDBApi {
         int i = 1;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{\"meals\":[");
-        // Getting list of id's to ues later when getting each recipe
+        // Getting list of id's to use later when getting each recipe
         for (JsonNode nd : node) {
             String recipeId = nd.get("idMeal").asText();
             try {
