@@ -103,32 +103,37 @@ public class Recipe {
         //Parse recipes
         node = node.get("meals");
         //Checking if node is array, if it is iterating through
-        // TODO need to catch NullPointerException in case object is null
-        if (node.isArray()) {
-            for (JsonNode jsonNode : node) {
-                ArrayList<String> ingredients = new ArrayList<>();
-                String strMeal = jsonNode.get("strMeal").asText();
-                String strInstructions = jsonNode.get("strInstructions").asText();
+        try {
+            if (node.isArray()) {
+                for (JsonNode jsonNode : node) {
+                    ArrayList<String> ingredients = new ArrayList<>();
+                    String strMeal = jsonNode.get("strMeal").asText();
+                    String strInstructions = jsonNode.get("strInstructions").asText();
 
-                //Getting ingredients, with the meal db, recipes have 20 ingredients with keys of i.e. strIngredient1,
-                // strIngredient2, strIngredient3, strIngredient4
-                for (int i = 0; i < 20; i++) {
-                    String num = String.valueOf(i + 1);
-                    String ingredient;
-                    //Checking for null ingredient values
-                    boolean notNull = !jsonNode.get("strIngredient" + num).asText().isBlank() && !jsonNode.get("strIngredient" + num).isNull();
-                    if (notNull) {
-                        //Ingredient example string "1) Onion - 1/2"
-                        // then adding to ingredients list
-                        ingredient = num + ")" + jsonNode.get("strIngredient" + num).asText(null) +
-                                " - " + jsonNode.get("strMeasure" + num).asText(null);
-                        ingredients.add(ingredient);
+                    //Getting ingredients, with the meal db, recipes have 20 ingredients with keys of i.e. strIngredient1,
+                    // strIngredient2, strIngredient3, strIngredient4
+                    for (int i = 0; i < 20; i++) {
+                        String num = String.valueOf(i + 1);
+                        String ingredient;
+                        //Checking for null ingredient values
+                        boolean notNull = !jsonNode.get("strIngredient" + num).asText().isBlank() && !jsonNode.get("strIngredient" + num).isNull();
+                        if (notNull) {
+                            //Ingredient example string "1) Onion - 1/2"
+                            // then adding to ingredients list
+                            ingredient = num + ")" + jsonNode.get("strIngredient" + num).asText(null) +
+                                    " - " + jsonNode.get("strMeasure" + num).asText(null);
+                            ingredients.add(ingredient);
+                        }
                     }
+                    Recipe recipe;
+                    recipe = new Recipe(strMeal, strInstructions, ingredients);
+                    recipes.add(recipe);
                 }
-                Recipe recipe;
-                recipe = new Recipe(strMeal, strInstructions, ingredients);
-                recipes.add(recipe);
             }
+
+        } catch (NullPointerException e){
+            System.out.println("Error parsing JSON \n[String:\""+
+                    recipesJson + "\"]");
         }
         return recipes;
     }
